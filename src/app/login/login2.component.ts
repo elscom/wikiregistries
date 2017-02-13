@@ -1,11 +1,11 @@
 import {Component, ElementRef} from '@angular/core';
-import {AuthenticationService} from '../auth/auth2.service';
+import {AuthService} from '../auth/auth2.service';
 
 import {User} from '../user/user';
  
 @Component({
     selector: 'login-form',
-    providers: [AuthenticationService],
+    providers: [AuthService],
     templateUrl: './login2.component.html' 
     
 })
@@ -17,9 +17,10 @@ export class LoginComponent {
     public errorMsg = '';
  
     constructor(
-        private _service:AuthenticationService) {}
+        private _service:AuthService) {}
  
     login(data ) {
+        //console.log('Login Start')
         if(!this._service.login(data)){
             this.errorMsg = 'Failed to login';
         }
