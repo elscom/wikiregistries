@@ -1,4 +1,4 @@
- <form #f="form" (ng-submit)="login(f.value)">
+ <form #f="ngForm" (ngSubmit)="login(f.value)">
  <div ng-control-group="credentials">
  <div class="container" >
             <div class="title">
@@ -7,7 +7,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="input-field col s12">
-          <label for="email">Username</label>
+          <label for="email">Email</label>
           <input
             type="text"
             id="email"
@@ -27,7 +27,7 @@
                 </div>
  
                 <span>{{errorMsg}}</span>
-                <button>Login!</button>
+                <button  type="submit">Login!</button>
             </div>
         </div>
                 </div>
