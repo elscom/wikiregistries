@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-import {AuthenticationService} from '../auth/auth2.service'
+import {AuthService} from '../auth/auth2.service'
  
 @Component({
     selector: 'login-form',
-    providers: [AuthenticationService],
+    providers: [AuthService],
     templateUrl: './private.component.html'
 })
  
 export class PrivateComponent {
  
     constructor(
-        private _service:AuthenticationService){}
+        private _service:AuthService){}
  
     ngOnInit(){
         this._service.checkCredentials();
