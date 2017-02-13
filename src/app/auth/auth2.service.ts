@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { User } from '../user/user';
+import 'rxjs/add/operator/map'
 
  
 //var users = [
@@ -11,7 +12,7 @@ import { User } from '../user/user';
 //];
  
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private userUrl = 'http://test.wikiregistries.com/php/get_user.php';  // URL to web api
   private vdata;
@@ -25,10 +26,13 @@ export class AuthenticationService {
   }
  
   login(data){
+    console.log('Auth Start')
     //var x = this.getUser(user.email);
     //var authenticatedUser = users.find(u => u.email === user.email);
-    var email = data.credentials.email;
-    var password = data.credentials.password;
+    //var email = data.credentials.email;
+    //var password = data.credentials.password;
+    var email = data.email;
+    var password = data.password;
     var creds = "email=" + email + "&password=" + password; 
     //var creds: string; 
     //creds = "email="+user.email;
@@ -38,7 +42,7 @@ export class AuthenticationService {
     .subscribe(
       data => this.saveData(data),
       err => this.handleError(err),
-      () => console.log('Auth COmplete')
+      () => console.log('Auth Complete')
     );
         
     //  .then(cuser => cuser.email = user.email);
