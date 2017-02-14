@@ -1,5 +1,6 @@
 import {Component, ElementRef} from '@angular/core';
 import {AuthService} from '../auth/auth2.service';
+import { Router } from '@angular/router';
 
 import {User} from '../user/user';
  
@@ -20,13 +21,17 @@ export class LoginComponent {
         email: "",
         password: ""
     };
-    constructor(
-        private _service:AuthService) {}
+    constructor(private _service:AuthService, private router: Router) {
+
+    }
  
     login(data) {
         //console.log('Login Start')
-        if(!this._service.login(this.userParams)){
-            this.errorMsg = 'Failed to login';
-        }
+        this._service.login(this.userParams).then((res:any)=>{
+            console.log(res);
+            this.router.navigate(['/']);
+        },(err)=>{
+            console.log(err);
+        })
     }
 }

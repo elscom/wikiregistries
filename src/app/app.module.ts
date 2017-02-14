@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ROUTES } from './app.routes'
 import { UserService }          from './user/user.service';
 import { AuthService } from './auth/auth2.service';
+import { AuthGuard } from './auth/auth.guard';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 
@@ -26,7 +27,6 @@ import { LocalStorageModule } from 'angular-2-local-storage';
     UserComponent,
     DashboardComponent,
     PrivateComponent
-
   ],
   imports: [
     BrowserModule,
@@ -39,7 +39,7 @@ import { LocalStorageModule } from 'angular-2-local-storage';
     RouterModule.forRoot(ROUTES)
 
   ],
-  providers: [AuthService, UserService ]
+  providers: [AuthService, UserService, AuthGuard ]
 })
 
 export class AppModule { }

@@ -7,12 +7,12 @@ import {AuthService} from '../auth/auth2.service'
 })
  
 export class PrivateComponent {
- 
-    constructor(
-        private _service:AuthService){}
+    userData: any;
+    constructor(private _service:AuthService){}
  
     ngOnInit(){
-        this._service.checkCredentials();
+        // this._service.checkCredentials();
+        this.userData = this._service.getUser();
     }
  
     logout() {

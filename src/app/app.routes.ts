@@ -10,19 +10,14 @@ import { PrivateComponent } from './private/private.component';
 
 var appRoutes:any = [
     {
-        path: 'dashboard',
-        //component: DashboardComponent,
-        component:  PrivateComponent,
+        path: '',
+        component: PrivateComponent,
+        pathMatch: 'full',
         canActivate: [ AuthGuard ]
     },
     {
         path: 'login',
         component: LoginComponent
-    },
-    {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
     }
 ];
 

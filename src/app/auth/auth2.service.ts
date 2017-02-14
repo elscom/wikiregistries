@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map'
 export class AuthService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private userUrl = 'http://test.wikiregistries.com/php/get_user.php';  // URL to web api
+  // private userUrl = 'http://localhost:80/wikiregister/get_user.php';  // URL to web api
   private vdata;
   private loggedIn: boolean = false;
   constructor(
@@ -29,8 +30,17 @@ export class AuthService {
 
   isLoggedIn(){
     let self = this;
-    self.loggedIn = !!localStorage.getItem('user');
+    self.loggedIn = !!self.getUser();
     return this.loggedIn;
+  }
+
+  setUser(userData){
+    localStorage.setItem("user", JSON.stringify(userData));
+  }
+
+  getUser(){
+    let user = localStorage.getItem("user");
+    return user? JSON.parse( user) : null;
   }
 
   login(data){
@@ -46,9 +56,11 @@ export class AuthService {
 
       self.http.post(self.userUrl, data).toPromise()
           .then(
-              res => {
-                console.log(res);
-                resolve(res);
+              (res:any) => {
+                var dataReceived = JSON.parse(res._body);
+                dataReceived = dataReceived[0];
+                self.setUser(dataReceived);
+                resolve(dataReceived);
               }
           )
           .catch((err) => {
