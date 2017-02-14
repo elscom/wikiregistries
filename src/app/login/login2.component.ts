@@ -1,5 +1,6 @@
 import {Component, ElementRef} from '@angular/core';
 import {AuthService} from '../auth/auth2.service';
+import { Router } from '@angular/router';
 
 import {User} from '../user/user';
  
@@ -15,14 +16,22 @@ export class LoginComponent {
     public user =   new User(0,'','','','',1,'', 1234,1,1,1,'',0,'',false);
 
     public errorMsg = '';
+
+    public userParams = {
+        email: "",
+        password: ""
+    };
+    constructor(private _service:AuthService, private router: Router) {
+
+    }
  
-    constructor(
-        private _service:AuthService) {}
- 
-    login(data ) {
+    login(data) {
         //console.log('Login Start')
-        if(!this._service.login(data)){
-            this.errorMsg = 'Failed to login';
-        }
+        this._service.login(this.userParams).then((res:any)=>{
+            console.log(res);
+            this.router.navigate(['/']);
+        },(err)=>{
+            console.log(err);
+        })
     }
 }

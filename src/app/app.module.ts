@@ -8,16 +8,18 @@ import { AppComponent } from './app.component';
 //import { LoginComponent } from './login/login.component';
 import { LoginComponent } from './login/login2.component';
 import { AuthComponent } from './auth/auth.component';
-import {PrivateComponent} from './private/private.component';
+import { PrivateComponent } from './private/private.component';
 import { UserComponent } from './user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { ROUTES } from './app.routes'
 import { UserService }          from './user/user.service';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './auth/auth2.service';
+import { AuthGuard } from './auth/auth.guard';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -25,32 +27,19 @@ import { LocalStorageModule } from 'angular-2-local-storage';
     UserComponent,
     DashboardComponent,
     PrivateComponent
-    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      {
-  path: 'dashboard',
-  //component: DashboardComponent,
-  component:  PrivateComponent,
-  pathMatch: 'full'
-},
-  {
-    path: 'login',
-    component: LoginComponent
-  }
-]),
-  LocalStorageModule.withConfig({
-    prefix: 'my-app',
-    storageType: 'localStorage'
-   })
+    LocalStorageModule.withConfig({
+      prefix: 'my-app',
+      storageType: 'localStorage'
+    }),
+    RouterModule.forRoot(ROUTES)
 
   ],
-  providers: [UserService, AuthService, UserService ],
-  bootstrap: [AppComponent]
+  providers: [AuthService, UserService, AuthGuard ]
 })
 
 export class AppModule { }
