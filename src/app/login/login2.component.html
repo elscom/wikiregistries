@@ -1,34 +1,38 @@
- <form #f="ngForm" (ngSubmit)="login(f.value)">
- <div ng-control-group="credentials">
- <div class="container" >
+<form #f="ngForm" (ngSubmit)="login()">
+    <div ng-control-group="credentials">
+        <div class="container">
             <div class="title">
                 Welcome
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="input-field col s12">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            ng-control="email"
-            required>
+                        <label for="email">Email</label>
+                        <input
+                                type="text"
+                                id="email"
+                                ng-control="email"
+                                name="email"
+                                [(ngModel)]="userParams.email"
+                                required>
                     </div>
                 </div>
-                 <div class="row">
+                <div class="row">
                     <div class="input-field col s12">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            ng-control="password"
-            required>
+                        <label for="password">Password</label>
+                        <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                ng-control="password"
+                                [(ngModel)]="userParams.password"
+                                required>
                     </div>
                 </div>
- 
+
                 <span>{{errorMsg}}</span>
-                <button  type="submit">Login!</button>
+                <button type="submit">Login!</button>
             </div>
         </div>
-                </div>
- </form>
+    </div>
+</form>

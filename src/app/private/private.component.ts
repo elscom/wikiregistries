@@ -2,8 +2,7 @@ import {Component} from '@angular/core';
 import {AuthService} from '../auth/auth2.service'
  
 @Component({
-    selector: 'login-form',
-    providers: [AuthService],
+    selector: 'private-component',
     templateUrl: './private.component.html'
 })
  

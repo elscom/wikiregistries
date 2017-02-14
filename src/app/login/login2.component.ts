@@ -15,13 +15,17 @@ export class LoginComponent {
     public user =   new User(0,'','','','',1,'', 1234,1,1,1,'',0,'',false);
 
     public errorMsg = '';
- 
+
+    public userParams = {
+        email: "",
+        password: ""
+    };
     constructor(
         private _service:AuthService) {}
  
-    login(data ) {
+    login(data) {
         //console.log('Login Start')
-        if(!this._service.login(data)){
+        if(!this._service.login(this.userParams)){
             this.errorMsg = 'Failed to login';
         }
     }
