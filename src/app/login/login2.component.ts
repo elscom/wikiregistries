@@ -19,7 +19,8 @@ export class LoginComponent {
 
     public userParams = {
         email: "",
-        password: ""
+        password: "",
+        loginfailed: false
     };
     constructor(private _service:AuthService, private router: Router) {
 
@@ -29,7 +30,12 @@ export class LoginComponent {
         //console.log('Login Start')
         this._service.login(this.userParams).then((res:any)=>{
             console.log(res);
+            if (res.id != '') {
             this.router.navigate(['/']);
+        } else {
+                this.userParams.loginfailed = true;
+                this.router.navigate(['/login']);
+            }
         },(err)=>{
             console.log(err);
         })
